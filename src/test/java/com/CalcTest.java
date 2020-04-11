@@ -1,3 +1,6 @@
+package com;
+
+import com.Calc;
 import org.junit.Before;
 
 import org.junit.*;
