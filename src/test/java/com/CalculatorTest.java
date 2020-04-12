@@ -1,16 +1,15 @@
 package com;
 
-import com.Calc;
 import org.junit.Before;
 
 import org.junit.*;
 
-public class CalcTest {
+public class CalculatorTest {
 
-    private Calc calc;
+    private Calculator calc;
     @Before
     public void setUp() {
-        calc = new Calc();
+        calc = new Calculator();
     }
 
     @Test
