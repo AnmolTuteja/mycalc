@@ -6,7 +6,7 @@
 ############################################################
 
 # Set the base image
-FROM openjdk_1.8.0_242
+FROM anmol/ubuntu_18.04.3_lts-openjdk_1.8.0_242
 
 # File Author
 MAINTAINER Anmol_Tuteja
