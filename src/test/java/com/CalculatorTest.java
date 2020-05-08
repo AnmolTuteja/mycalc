@@ -16,9 +16,8 @@ public class CalculatorTest {
     public void testAdd() {
         int a = 12;
         int b = 21;
-        char x='+';
         int expectedResult = 33;
-        long result = calc.applyOp(x,a, b);
+        long result = calc.add(a, b);
         Assert.assertEquals(expectedResult, result);;
     }
 }

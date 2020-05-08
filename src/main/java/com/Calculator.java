@@ -1,107 +1,44 @@
 package com;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.*;
-import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import java.util.Scanner;
 
-@WebServlet
-public class Calculator extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String expr = req.getParameter("expr");
-        int result = 0;
-        PrintWriter out = resp.getWriter();
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<title>Result Page</title>");
-        out.println("</head>");
-        out.println("<body>");
-        out.println("<h2>");
-        try {
-            result = evaluate(expr);
-            out.println(expr+" = "+result);
-        }
-        catch(Exception e) {
-            out.println("Invalid Expression : {{ " + expr + " }}");
-        }
-        out.println("</h2>");
-        out.println("</body>");
-        out.println("</html>");
+public class Calculator {
+    public static int mul(int a, int b){ return a*b; }
+    public static int div(int a, int b){
+        return a/b;
     }
+    public static int add(int a, int b){
+        return a+b;
+    }
+    public static int sub(int a, int b){ return a-b; }
 
-    public static int evaluate(String expression)
-    {
-        char[] tokens = expression.toCharArray();
-        Stack<Integer> values = new Stack<Integer>();
-        Stack<Character> ops = new Stack<Character>();
+    public static void main(String[] args) {
 
-        for (int i = 0; i < tokens.length; i++)
-        {
-            if (tokens[i] == ' ')
-                continue;
-            if (tokens[i] >= '0' && tokens[i] <= '9')
-            {
-                StringBuffer sbuf = new StringBuffer();
-                while (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9')
-                    sbuf.append(tokens[i++]);
-                values.push(Integer.parseInt(sbuf.toString()));
-            }
-            else if (tokens[i] == '(')
-                ops.push(tokens[i]);
-            else if (tokens[i] == ')')
-            {
-                while (ops.peek() != '(')
-                    values.push(applyOp(ops.pop(), values.pop(), values.pop()));
-                ops.pop();
-            }
-            else if (tokens[i] == '+' || tokens[i] == '-' ||
-                    tokens[i] == 'x' || tokens[i] == '/' || tokens[i]=='^')
-            {
-                while (!ops.empty() && hasPrecedence(tokens[i], ops.peek()))
-                    values.push(applyOp(ops.pop(), values.pop(), values.pop()));
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter 1st number");
+        int num1=sc.nextInt();
+        System.out.println("Enter 2nd number");
+        int num2=sc.nextInt();
+        System.out.println("Enter the operator");
+        String op=sc.next();
 
-                ops.push(tokens[i]);
+
+            switch(op){
+                case "*":
+                    System.out.println(mul(num1,num2));
+                    break;
+                case "/":
+                    System.out.println(div(num1,num2));
+                    break;
+                case "+":
+                    System.out.println(add(num1,num2));
+                    break;
+                case "-":
+                    System.out.println(sub(num1,num2));
+                    break;
+                default: System.out.println("Exiting program due to invalid input 1");
             }
         }
-        while (!ops.empty())
-            values.push(applyOp(ops.pop(), values.pop(), values.pop()));
-        return values.pop();
-    }
 
-    public static boolean hasPrecedence(char op1, char op2)
-    {
-        if (op2 == '(' || op2 == ')')
-            return false;
-        if (op1 == '^')
-            return false;
-        if ((op1 == 'x' || op1 == '/') && (op2 == '+' || op2 == '-'))
-            return false;
-        else
-            return true;
-    }
-    public static int applyOp(char op, int b, int a)
-    {
-        switch (op)
-        {
-            case '+':
-                return a + b;
-            case '-':
-                return a - b;
-            case 'x':
-                return a * b;
-            case '/':
-                if (b == 0)
-                    return Integer.MAX_VALUE;
-                return a / b;
-            case '^':
-                return (int)Math.pow(a, b);
-        }
-        return 0;
-    }
 
-}
+    }
