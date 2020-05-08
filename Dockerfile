@@ -9,5 +9,4 @@ WORKDIR /usr/local
 ADD target/calculator-1.0-SNAPSHOT.jar .
 
 # Default container command
-ENTRYPOINT ["/usr/bin/java", "-cp", "calculator-1.0-SNAPSHOT.jar", "com/Calculator"]
-
+ENTRYPOINT ["/usr/bin/java", "-cp", "calculator-1.0-SNAPSHOT.jar", "com/Calculator"] 
