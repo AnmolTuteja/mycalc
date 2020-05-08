@@ -2,86 +2,89 @@
 <html>
 <head>
     <script>
-        //function that display value
-        function dis(val)
-        {
-            document.getElementById("result").value+=val
-        }
+        function dis(e){
+            var epr = document.getElementsByName("expr")[0];
+            if(isNaN(e.innerText) || isNaN(epr.value.charAt(epr.value.length-1)))
+                epr.value = epr.value+" "+e.innerText;
+            else
+                epr.value = epr.value+e.innerText;
 
-        //function that evaluates the digit and return result
-        function solve()
-        {
-            let x = document.getElementById("result").value
-            let y = eval(x)
-            document.getElementById("result").value = y
-        }
-
-        //function that clear the display
-        function clr()
-        {
-            document.getElementById("result").value = ""
         }
     </script>
+    <script>
+        function clr(){
+            var epr = document.getElementsByName("expr")[0];
+            epr.value = "";
+        }
+    </script>
+
     <!-- for styling -->
     <style>
+        form{
+
+        }
+        button{
+            padding: 20px 20px;
+            display: inline-block;
+        }
         .title{
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             text-align:center;
-            width: 210px;
+            width: 400px;
             border: solid black 2px;
+
         }
 
         input[type="button"]
         {
             color: black;
             border: solid black 2px;
-            width:100%
+            width:100%;
+            height: 10px;
+            padding: 20px 20px;
         }
 
         input[type="text"]
         {
-            background-color:white;
-            border: solid black 2px;
-            width:100%
+            background-color:black;
+            color: white;
+            font-size: 15px;
+            text-align: center;
+            text-: strong;
+
+            width:100%;
         }
     </style>
 </head>
 <!-- create table -->
 <body>
-<div class = title >My Calculator</div>
-<table border="1">
-    <tr>
-        <td colspan="3"><input type="text" id="result"/></td>
-        <!-- clr() function will call clr to clear all value -->
-        <td><input type="button" value="c" onclick="clr()"/> </td>
-    </tr>
-    <tr>
-        <!-- create button and assign value to each button -->
-        <!-- dis("1") will call function dis to display value -->
-        <td><input type="button" value="1" onclick="dis('1')"/> </td>
-        <td><input type="button" value="2" onclick="dis('2')"/> </td>
-        <td><input type="button" value="3" onclick="dis('3')"/> </td>
-        <td><input type="button" value="/" onclick="dis('/')"/> </td>
-    </tr>
-    <tr>
-        <td><input type="button" value="4" onclick="dis('4')"/> </td>
-        <td><input type="button" value="5" onclick="dis('5')"/> </td>
-        <td><input type="button" value="6" onclick="dis('6')"/> </td>
-        <td><input type="button" value="-" onclick="dis('-')"/> </td>
-    </tr>
-    <tr>
-        <td><input type="button" value="7" onclick="dis('7')"/> </td>
-        <td><input type="button" value="8" onclick="dis('8')"/> </td>
-        <td><input type="button" value="9" onclick="dis('9')"/> </td>
-        <td><input type="button" value="+" onclick="dis('+')"/> </td>
-    </tr>
-    <tr>
-        <td><input type="button" value="." onclick="dis('.')"/> </td>
-        <td><input type="button" value="0" onclick="dis('0')"/> </td>
-        <!-- solve function call function solve to evaluate value -->
-        <td><input type="button" value="=" onclick="solve()"/> </td>
-        <td><input type="button" value="*" onclick="dis('*')"/> </td>
-    </tr>
-</table>
+<form method="post" action="Calculator" style=" align: center;">
+    <input type="text"  name="expr" value="Perform your Calculation" readonly style="width: 83% ; height: 40px" />
+
+    <div style="display: grid; grid-template-columns: repeat(6,1fr);
+            grid-gap:5px;
+            padding: 5px;">
+        <button type="button" name="one" onclick="dis(this);" >1</button>
+        <button type="button" name="two" onclick="dis(this);">2</button>
+        <button type="button"  name="thr" onclick="dis(this);">3</button>
+        <button type="button"  name="add" onclick="dis(this);">+</button>
+        <button type="button"  name="sub" onclick="dis(this);">-</button><br/>
+        <button type="button"  name="for" onclick="dis(this);">4</button>
+        <button type="button" name="fiv" onclick="dis(this);">5</button>
+        <button type="button" name="six" onclick="dis(this);">6</button>
+        <button type="button"  name="mul" onclick="dis(this);">x</button>
+        <button type="button" name="div" onclick="dis(this);">/</button><br/>
+        <button type="button" name="sev" onclick="dis(this);">7</button>
+        <button type="button" name="eig" onclick="dis(this);">8</button>
+        <button type="button" name="nin" onclick="dis(this);">9</button>
+        <button type="button" name="lpar" onclick="dis(this);">(</button>
+        <button type="button" name="rpar" onclick="dis(this);">)</button><br/>
+        <button type="button" name="zro" onclick="dis(this);">0</button>
+        <button type="button"  name="dot" onclick="dis(this);">.</button>
+        <button type="button"  name="pwr" onclick="dis(this);">^</button>
+        <button type="button" name="clr" onclick="clr();"    >C</button>
+        <input type="submit"  value="=" style="padding: 20px 20px; display: inline-block;">
+    </div>
+</form>
 </body>
 </html>
