@@ -1,7 +1,5 @@
 package com;
 
-import java.util.Scanner;
-
 public class Calculator {
     public static int mul(int a, int b){ return a*b; }
     public static int div(int a, int b){
@@ -13,15 +11,14 @@ public class Calculator {
     public static int sub(int a, int b){ return a-b; }
 
     public static void main(String[] args) {
-
-        Scanner sc=new Scanner(System.in);
-        System.out.println("Enter 1st number");
-        int num1=sc.nextInt();
-        System.out.println("Enter 2nd number");
-        int num2=sc.nextInt();
-        System.out.println("Enter the operator");
-        String op=sc.next();
-
+        if(args.length > 0){
+            for(int i=0;i<args.length;i++){
+                System.out.print(args[i]+" ");
+            }
+            System.out.println();
+            int num1 = Integer.parseInt(args[0]);
+            String op = args[1];
+            int num2 = Integer.parseInt(args[2]);
 
             switch(op){
                 case "*":
@@ -39,6 +36,9 @@ public class Calculator {
                 default: System.out.println("Exiting program due to invalid input 1");
             }
         }
-
+        else{
+            System.out.println("Exiting program due to invalid input");
+        }
 
     }
+}
